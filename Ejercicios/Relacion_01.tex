@@ -1,0 +1,158 @@
+\documentclass[10pt,a4paper,spanish]{article}
+
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amsthm}
+\usepackage{amsfonts, amssymb, latexsym}
+\usepackage{enumerate}
+\usepackage[official]{eurosym}
+\usepackage{graphicx}
+\usepackage[usenames, dvipsnames]{color}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{fancyhdr}
+\usepackage{fancybox}
+\usepackage{pseudocode}
+\usepackage[all]{xy}
+\usepackage{minted}
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\pgfplotsset{compat=1.5}
+
+% a4large.sty -- fill an A4 (210mm x 297mm) page
+% Note: 1 inch = 25.4 mm = 72.27 pt
+%       1 pt = 3.5 mm (approx)
+
+% vertical page layout -- one inch margin top and bottom
+\topmargin      0 mm    % top margin less 1 inch
+\headheight     0 mm    % height of box containing the head
+\headsep       10 mm    % space between the head and the body of the page
+\textheight   250 mm
+\footskip      14 mm    % distance from bottom of body to bottom of foot
+
+% horizontal page layout -- one inch margin each side
+%\oddsidemargin    0   mm    % inner margin less one inch on odd pages
+%\evensidemargin   0   mm    % inner margin less one inch on even pages
+%\textwidth      159.2 mm    % normal width of text on page
+
+\usepackage[math]{iwona}
+\usepackage[T1]{fontenc}
+\usepackage{inconsolata}
+
+\usepackage[pdftex, bookmarks=true,
+bookmarksnumbered=false, % true means bookmarks in
+% left window are numbered
+bookmarksopen=false,     % true means only level 1
+% are displayed.
+colorlinks=true,
+linkcolor=webblue]{hyperref}
+
+\definecolor{webgreen}{rgb}{0, 0.5, 0} % less intense green
+\definecolor{webblue}{rgb}{0, 0, 0.5}  % less intense blue
+\definecolor{webred}{rgb}{0.5, 0, 0}   % less intense red
+\definecolor{dblackcolor}{rgb}{0.0,0.0,0.0}
+\definecolor{dbluecolor}{rgb}{.01,.02,0.7}
+\definecolor{dredcolor}{rgb}{0.8,0,0}
+\definecolor{dgraycolor}{rgb}{0.30,0.3,0.30}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % regla horizontal para  el titulo
+
+\pagestyle{fancy}
+%con esto nos aseguramos de que las cabeceras de capítulo y de sección vayan en minúsculas
+
+\renewcommand{\chaptermark}[1]{%
+\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{%
+\markright{\thesection\ #1}}
+\fancyhf{} %borra cabecera y pie actuales
+\fancyhead[LE,RO]{\bfseries\thepage}
+\fancyhead[LO]{\bfseries\leftmark}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\addtolength{\headheight}{0.5pt} %espacio para la raya
+\fancypagestyle{plain}{%
+\fancyhead{} %elimina cabeceras en páginas "plain"
+\renewcommand{\headrulewidth}{0pt} %así como la raya
+}
+
+%%%%% Para cambiar el tipo de letra en el título de la sección %%%%%%%%%%%
+\usepackage{sectsty}
+\chapterfont{\fontfamily{pag}\selectfont} %% for chapter if you want
+\sectionfont{\fontfamily{pag}\selectfont}
+\subsectionfont{\fontfamily{pag}\selectfont}
+\subsubsectionfont{\fontfamily{pag}\selectfont}
+
+\renewcommand{\labelenumi}{\arabic{enumi}. }
+\renewcommand{\labelenumii}{\labelenumi\alph{enumii}) }
+\renewcommand{\labelenumiii}{\labelenumii\roman{enumiii}: }
+
+\begin{document}
+  \setcounter{section}{0}
+  \title{\huge\bf Informática Industrial \\ Relación de Ejercicios Nº 1}
+  \author{\large David Sánchez Jiménez}
+  \maketitle
+  \vspace{3cm}
+
+  \begin{enumerate}
+    \item Diseñar el diagrama de bloques de un sistema para la regulación de la concentración de azúcar en la sangre de un diabético
+    \begin{figure}[!hbp]
+      \centering  \includegraphics[width=1\textwidth]{./Imagenes/Ejercicio_01.png}
+    \end{figure}
+
+    \item Dibuja el diagrama de bloques de un posible sistema de control de rumbo de un barco a motor (piloto automático).
+    \begin{figure}[!hbp]
+      \centering  \includegraphics[width=1\textwidth]{./Imagenes/Ejercicio_02.png}
+    \end{figure}
+
+    \newpage
+    \item Diseñar un sistema de control de rumbo de un velero, que se mueve sólo por la acción del viento. Estudia hasta que posición con respecto al viento pueden navegar los veleros y contempla la posibilidad de optimizar las "bordadas" (navegación en zigzag) para dirigirse a una posición determinada.
+    \begin{figure}[!hbp]
+      \centering  \includegraphics[width=1\textwidth]{./Imagenes/Ejercicio_03.png}
+    \end{figure}
+
+    \item Explica cómo funciona el dispositivo de transporte personal SEGWAY. Diseña un sistema de regulación del mantenimiento de la posición vertical de dicho dispositivo de dos ruedas.
+    \begin{figure}[!hbp]
+      \centering  \includegraphics[width=1\textwidth]{./Imagenes/Ejercicio_04.png}
+    \end{figure}
+
+    \newpage
+    \item Las cámaras con autofoco ajustan la lente en función de la distancia de la cámara al objeto, medida con un haz de infrarrojos (o de ultrasonidos). Dibuja un diagrama del sistema de control.
+    \begin{figure}[!hbp]
+      \centering  \includegraphics[width=1\textwidth]{./Imagenes/Ejercicio_05.png}
+    \end{figure}
+
+    \item Un cuadricóptero es un dispositivo volador de 4 motores. Estudia su funcionamiento y descríbelo. Describe los sensores y actuadores que incorpora y su sistema de regulación.
+
+    \noindent
+    Un cuadricóptero es un helicóptero con cuatro rotores para su sostén y su propulsión. Estos rotores están generalmente colocados en las extremidades de una cruz. A fin de evitar que el aparato se tumbe respecto a su eje de orientación es necesario que dos hélices giren en el mismo sentido. El control del movimiento se consigue variando la velocidad relativa de cada rotor para cambiar el empuje y el par motor producido por cada uno de ellos.
+
+    \noindent
+    Los sensores necesarios para poder realizar su función pueden variar en función de los requerimientos del mismo pero como mínimo este deberá contar con un giroscopio para obtener la información necesaria con la que gestionar los motores y un receptor de señal con el que comunicarse con el mando radiocontrol.
+
+    \item Algunas duchas disponen de dos entradas (agua fría y agua caliente) y de un sistema de regulación de la temeratura deseada del agua. Describe su posible funcionamiento.
+
+    \noindent
+    Para realizar un correcto adecuamiento de la temperatura necesitaría un sensor de temperatura y una valvula con dos vías de entrada para el agua fria y caliente, las cuales deberán abrirse o cerrarse más hasta que el sensor de temperatura sea igual que el valor de la temperatura del agua deseada.
+
+    \item Estudia el funcionamiento de un sistema de calefacción por suelo radiante. Describe un posible sistema de control del mismo.
+
+    \noindent
+    Para controlar la temperatura en la superficie del suelo radiante necesitaremos varios sensores de temperatura repartidos por toda la habitación. El tipo de suelo radiante más utilizado es el suelo radiante por agua el cual consiste en una red de tuberias distribuidas por el interior del suelo de la habitación por las que circulará agua caliente la cual subirá la temperatura del suelo. Un posible sistema de control sería un regulador del caudal del agua caliente que corte el paso de esta cuando se llegue a la temperatura deseada por el usuario.
+
+    \newpage
+    \item Diseña un sistema de control del climatizador de un coche.
+
+    \noindent
+    Un sistema de control del climatizador de un coche requerirá del uso del ordenador de abordo de este y será el encargado de controlar la salida de frío o calor dentro del habitáculo del vehiculo.
+
+    \noindent
+    Para esta tarea necesitaremos un detector de temperatura. Este tendrá una temperatura prefijada por el usuario la cual será comparada con la temperatura en el interior del vehículo haciendo que se active el aire frío o caliente hasta que ambas temperaturas sean iguales.
+
+    \item Describe un posible sistema de regulación de la intensidad luminosa de una oficina, regulando la posición de una persiana y las lamparas de la oficina. Contempla la posibilidad de ahorro energético cuando la oficina no está ocupada.
+
+    \noindent
+    Para regular la intensidad luminosa de una oficina debemos repartir por la estancia medidores de flujo lumínico (lumens) los cuales seran controlados por nuestro sistema regulador. Mientras la luz no sea la adecuada el sistema abrira o cerrara las persianas y encendera o apagara las luces hasta conseguirlo el nivel de luz adecuado. El sistema controlara los sensores comprobando si se ha llegado a los lumens deseados actuando en consecuencia.
+
+  \end{enumerate}
+\end{document}
