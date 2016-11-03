@@ -1,0 +1,260 @@
+\documentclass[10pt,a4paper,spanish]{article}
+
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amsthm}
+\usepackage{amsfonts, amssymb, latexsym}
+\usepackage{enumerate}
+\usepackage[official]{eurosym}
+\usepackage{graphicx}
+\usepackage[usenames, dvipsnames]{color}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{fancyhdr}
+\usepackage{fancybox}
+\usepackage{pseudocode}
+\usepackage[all]{xy}
+\usepackage{minted}
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\pgfplotsset{compat=1.5}
+
+% a4large.sty -- fill an A4 (210mm x 297mm) page
+% Note: 1 inch = 25.4 mm = 72.27 pt
+%       1 pt = 3.5 mm (approx)
+
+% vertical page layout -- one inch margin top and bottom
+\topmargin      0 mm    % top margin less 1 inch
+\headheight     0 mm    % height of box containing the head
+\headsep       10 mm    % space between the head and the body of the page
+\textheight   250 mm
+\footskip      14 mm    % distance from bottom of body to bottom of foot
+
+% horizontal page layout -- one inch margin each side
+%\oddsidemargin    0   mm    % inner margin less one inch on odd pages
+%\evensidemargin   0   mm    % inner margin less one inch on even pages
+%\textwidth      159.2 mm    % normal width of text on page
+
+\usepackage[math]{iwona}
+\usepackage[T1]{fontenc}
+\usepackage{inconsolata}
+
+\usepackage[pdftex, bookmarks=true,
+bookmarksnumbered=false, % true means bookmarks in
+% left window are numbered
+bookmarksopen=false,     % true means only level 1
+% are displayed.
+colorlinks=true,
+linkcolor=webblue]{hyperref}
+
+\definecolor{webgreen}{rgb}{0, 0.5, 0} % less intense green
+\definecolor{webblue}{rgb}{0, 0, 0.5}  % less intense blue
+\definecolor{webred}{rgb}{0.5, 0, 0}   % less intense red
+\definecolor{dblackcolor}{rgb}{0.0,0.0,0.0}
+\definecolor{dbluecolor}{rgb}{.01,.02,0.7}
+\definecolor{dredcolor}{rgb}{0.8,0,0}
+\definecolor{dgraycolor}{rgb}{0.30,0.3,0.30}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % regla horizontal para  el titulo
+
+\pagestyle{fancy}
+%con esto nos aseguramos de que las cabeceras de capítulo y de sección vayan en minúsculas
+
+\renewcommand{\chaptermark}[1]{%
+\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{%
+\markright{\thesection\ #1}}
+\fancyhf{} %borra cabecera y pie actuales
+\fancyhead[LE,RO]{\bfseries\thepage}
+\fancyhead[LO]{\bfseries\leftmark}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\addtolength{\headheight}{0.5pt} %espacio para la raya
+\fancypagestyle{plain}{%
+\fancyhead{} %elimina cabeceras en páginas "plain"
+\renewcommand{\headrulewidth}{0pt} %así como la raya
+}
+
+%%%%% Para cambiar el tipo de letra en el título de la sección %%%%%%%%%%%
+\usepackage{sectsty}
+\chapterfont{\fontfamily{pag}\selectfont} %% for chapter if you want
+\sectionfont{\fontfamily{pag}\selectfont}
+\subsectionfont{\fontfamily{pag}\selectfont}
+\subsubsectionfont{\fontfamily{pag}\selectfont}
+
+\renewcommand{\labelenumi}{\arabic{enumi}. }
+\renewcommand{\labelenumii}{\labelenumi\alph{enumii}) }
+\renewcommand{\labelenumiii}{\labelenumii\roman{enumiii}: }
+
+\begin{document}
+  \setcounter{section}{0}
+  \title{\huge\bf Informática Industrial \\ Relación de Ejercicios Nº 2}
+  \author{\large David Sánchez Jiménez}
+  \maketitle
+  \vspace{3cm}
+
+  \begin{enumerate}
+    \item Expresar el concepto de controlador discontinuo (en 2 posiciones) con histéresis. Utilizar un ejemplo para la explicación de dicho concepto.
+
+    \noindent
+    Un controlador discontinuo en 2 posiciones con histéresis o controlador todo o nada consta de dos posiciones solo, encendido o apagado. Un ejemplo de esto podria ser un sistema de control de temperatura mediante termostato, el cual funciona o se apaga dependiendo de si la temperatura ha llegado al valor deseado por el usuario.
+
+    \item ¿Qué ocurre cuando la banda proporcional de un controlador proporcional es muy pequeña?
+
+    \noindent
+    Si la banda proporcional de un controlador proporcional es muy pequeña nos encontramos ante un controlador todo o nada.
+
+    \item Explicar, si es cierto, que con un controlador propocional-integral se eliminan los problemas de offset.
+
+    \noindent
+    El controlador proporcional-integral elimina los problemas de offset gracias a la integral del error desde 0 hasta el tiempo, por lo que hace el controlador muy estable a consecuencia de que los cambios en el deben ser relativamente lentos para evitar oscilaciones produciendo un sobredisparo de error
+
+    \item Obtener la ecuación recursiva de un controlador PID digital usando la aproximación trapezoidal para el cálculo de la integral.
+
+    \begin{displaymath}
+      P(t) = K_p[E(t) + K_i \int_{0}^{1} E(t)dt + k_d \frac{dE}{dt}] + P(0)
+    \end{displaymath}
+    Con aproximación digital:
+    \begin{displaymath}
+      P_n = K_p[E_{n-1} + K_i T_m \sum_{i=0}^{n-1} E_i + K_d \frac{E_n - E_{n-1}}{T_m}]
+    \end{displaymath}
+    Para la muestra n-1:
+    \begin{displaymath}
+      P_{n-1} = K_p[E_{n-1} + K_i T_m \sum_{i=0}^{n-2} E_i + K_d \frac{E_{n-1} - E_{n-2}}{T_m}]
+    \end{displaymath}
+    Restando:
+    \begin{displaymath}
+      P_n - P_{n-1} = K_p[E_n - E_{n-1} + K_i T_m E_{n-1} + \frac{K_d}{T_m}[E_n - 2E_{n-1}+E_{n-2}]]
+    \end{displaymath}
+    Nota:
+    \begin{displaymath}
+      \sum_{i=0}^{n-1} E_i - \sum_{i=0}^{n-2} E_i = E_{n-1} \rightarrow (\frac{E_n - E_{n-1}}{T_m}) - (\frac{E_{n-1} - E_{n-2}}{T_m}) = \frac{E_n - 2E_{n-1} + E_{n-2}}{T_m}
+    \end{displaymath}
+    Agrupando:
+    \begin{displaymath}
+      P_n - P_{n-1} = K_p[E_n (1 + \frac{K_d}{T_m})- E_{n-1} (1 - K_i T_m + \frac{2K_d}{T_m}) + E_{n-2} \frac{K_d}{T_m}]
+    \end{displaymath}
+    Haciendo:
+    \begin{equation}
+      \left
+      \begin{array}{ll}
+      q_0 = K_p (i + \frac{K_d}{T_m}) \\
+      q_1 = -K_p (1 - K_i T_m \frac{2K_d}{T_m}) \\
+      q_2 = K_p \frac{K_d}{T_m}
+      \end{array}
+      \right
+    \end{equation}
+    \begin{displaymath}
+      P_n = P_{n_1} + q_0 E_n + q_1 E_{n-1} + q_2 E_{n-2}
+    \end{displaymath}
+    Ahora añadimos la aproximacion trapezoidal para calclo de la integral:
+    \begin{displaymath}
+      Area = E_{n-1} T_m + \frac{1}{2} T_m (E_n - E_{n-1}) = \frac{T_m (E_{n-1}+E_n)}{2}
+    \end{displaymath}
+    \begin{equation}
+      \left
+      \begin{array}{ll}
+      P_n = P_{n-1} + q_0 E_n + q_1 E_{n-1} + q_2 E_{n-2} \\
+      q_0 = K_p (1 + \frac{K_d}{T_m}) \\
+      q_1 = -K_p (-1 \frac{T_m K_i}{2} - 2 \frac{K_d}{T_m}) \\
+      q_2 = K_p (K_i \frac{T_m}{2}+\frac{K_d}{T_m})
+      \end{array}
+      \right
+    \end{equation}
+
+    \item Explicar el concepto de control en cascada.
+
+    \noindent
+    El control en cascada es una técnica que usa dos sistemas de medición y control para manipular un solo elemento final de control. El controlador primario o maestro corresponde a la variable cuyo valor es el más importante y el controlador secundario o esclavo corresponde a la variable cuyo valor afecta a la variable primaria. La salida del controlador primario es el set point del controlador secundario. \\
+
+    \noindent
+    El uso de controladores en cascada reduce los efectos de una perturbación en la variable secundaria sobre la variable primaria y reduce los efectos de los retardos de tiempo.
+
+    \item Expresa el método y parámetros que se utilizan para medir la respuesta de un controlador.
+
+    \noindent
+    Para medir la respuesta de un controlador debemos evaluar el error de salida de la siguiente manera:
+
+    \begin{displaymath}
+      E(\%) = \frac{Vc - Vm}{Vmax - Vmin} x 100
+    \end{displaymath}
+
+    \item Expresar los criterios que se emplean para la optimización de lazos de control.
+
+    \begin{table}[htb]
+      \centering
+      \begin{tabular}{|c|c|c|c|}
+      \hline
+      & Banda Proporcional & Ti (min) & Td (min) \\ \hline
+      Presion & 20 & - & - \\ \hline
+      Caudal & 80-250 & 0.5-15 & - \\ \hline
+      Nivel & 50-100 & - & - \\ \hline
+      Temperatura & 20-50 & 0.5-15 & 0.5-3 \\ \hline
+      \end{tabular}
+    \end{table}
+
+    \item Explicar por qué la acción integral elimina el offset o error residual en un controlador.
+
+    \noindent
+    La accion integral elimina el offset o error residual en un controlador porque le suma dicho error al controlador proporcional.
+
+
+    \item Un controlador tiene una señal de salida comprendida entre 4 y 20 mA, para controlar el caudal de una bomba entre 0 y 1000 litros/hora.
+
+    \begin{itemize}
+      \item Calcular la corriente que hay que suministrar a la bomba para conseguir un caudal de 150 l/h.
+      \item Expresar la salida en forma de \%.
+    \end{itemize}
+
+    \noindent
+    Primero planteamos la ecuación de la recta con las dos situaciones en las que conocemos el comportamiento del sistema para obtener la constante del caudal inicial.
+
+    \begin{displaymath}
+      Caudal = m * C + C_0
+    \end{displaymath}
+    \begin{equation}
+      \left
+      \begin{array}{ll}
+      0 = m * 4 + C_0 \\
+      1000 = m * 20 + C_0
+      \end{array}
+      \right\rbrace
+    \end{equation}
+    \begin{displaymath}
+      1000 = 16 * m \rightarrow m = 62.5 (l/h)/mA \rightarrow V_0 = -4 * 62.5 = -250 l/h
+    \end{displaymath}
+    \begin{displaymath}
+      Caudal = 65.5 * I - 250 \rightarrow 150  = 65.5 * I - 250 \rightarrow I = \frac{150+250}{62.5} \rightarrow I = 6.4 mA
+    \end{displaymath}
+    \begin{displaymath}
+      \frac{6.4*100}{20} = 32\%
+    \end{displaymath}
+
+    \item Indica los criterios de diseño y optimización de lazos de regulación.
+
+    \noindent
+    Los criterios de diseño y optimización de lazos de regulación son:
+
+    \begin{itemize}
+      \item Minimización del área de error.
+      \item Tiempos de asentamiento bajos.
+      \item Minimización de la oscilación.
+      \item Relación de un 1/4 de el segundo sobre disparo con respecto del primero.
+    \end{itemize}
+
+    \item Explica los tres métodos de sincronización experimental de lazos de control.
+
+    \noindent
+    Los tres métodos de sincronización experimental de lazos de control son:
+
+    \begin{itemize}
+      \item \textbf{Método de tanteo:} Se seleccionan inicialmente las constantes con el sistema en lazo cerrado y a continuación se cambia la consigna para provocar un cambio y se registra la evolución de la variable. Se ensayan valores de la acción diferencial hasta conseguir estabilizar el sistema al encontrar una relación de amortización de 4/1.
+
+      \item \textbf{Método de ciclo límite o Método Ziegler-Nichols:} Se caracteriza por la determinación por la ganancia y periodo de oscilación críticos, $K_u$ y $P_u$ que corresponden al sistema en oscilación. Se conecta el controlador en modo automático y se aplica una pequeña entrada esperando una respuesta. Si la curva de respuesta no se amortigua significa que la ganancia es demasiado alta por lo que la banda proporcional es muy baja. Para solucionar esto se aumenta la banda proporcional y se repite la accion. Cuando la respuesta es estable significa que oscila de forma regular y así obtendremos el valor de la banda proporcional y el periodo critico de oscilacion.
+
+      \item \textbf{Método de lazo cerrado o Método Harriot:} Similar al método Ziegler-Nichols a diferencia que este se realiza hasta que se obtiene en la curva de respuesta del proceso una razón de amortiguación de 1/4.
+    \end{itemize}
+
+  \end{enumerate}
+\end{document}
