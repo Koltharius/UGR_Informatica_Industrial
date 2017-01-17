@@ -1,0 +1,249 @@
+\documentclass[10pt,a4paper,spanish]{article}
+
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath, amsthm}
+\usepackage{amsfonts, amssymb, latexsym}
+\usepackage{enumerate}
+\usepackage[official]{eurosym}
+\usepackage{graphicx}
+\usepackage[usenames, dvipsnames]{color}
+\usepackage{colortbl}
+\usepackage{multirow}
+\usepackage{fancyhdr}
+\usepackage{fancybox}
+\usepackage{pseudocode}
+\usepackage[all]{xy}
+\usepackage{minted}
+\usepackage{tikz}
+\usepackage{pgfplots}
+
+\pgfplotsset{compat=1.5}
+
+% a4large.sty -- fill an A4 (210mm x 297mm) page
+% Note: 1 inch = 25.4 mm = 72.27 pt
+%       1 pt = 3.5 mm (approx)
+
+% vertical page layout -- one inch margin top and bottom
+\topmargin      0 mm    % top margin less 1 inch
+\headheight     0 mm    % height of box containing the head
+\headsep       10 mm    % space between the head and the body of the page
+\textheight   250 mm
+\footskip      14 mm    % distance from bottom of body to bottom of foot
+
+% horizontal page layout -- one inch margin each side
+%\oddsidemargin    0   mm    % inner margin less one inch on odd pages
+%\evensidemargin   0   mm    % inner margin less one inch on even pages
+%\textwidth      159.2 mm    % normal width of text on page
+
+\usepackage[math]{iwona}
+\usepackage[T1]{fontenc}
+\usepackage{inconsolata}
+
+\usepackage[pdftex, bookmarks=true,
+bookmarksnumbered=false, % true means bookmarks in
+% left window are numbered
+bookmarksopen=false,     % true means only level 1
+% are displayed.
+colorlinks=true,
+linkcolor=webblue]{hyperref}
+
+\definecolor{webgreen}{rgb}{0, 0.5, 0} % less intense green
+\definecolor{webblue}{rgb}{0, 0, 0.5}  % less intense blue
+\definecolor{webred}{rgb}{0.5, 0, 0}   % less intense red
+\definecolor{dblackcolor}{rgb}{0.0,0.0,0.0}
+\definecolor{dbluecolor}{rgb}{.01,.02,0.7}
+\definecolor{dredcolor}{rgb}{0.8,0,0}
+\definecolor{dgraycolor}{rgb}{0.30,0.3,0.30}
+
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}} % regla horizontal para  el titulo
+
+\pagestyle{fancy}
+%con esto nos aseguramos de que las cabeceras de capítulo y de sección vayan en minúsculas
+
+\renewcommand{\chaptermark}[1]{%
+\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{%
+\markright{\thesection\ #1}}
+\fancyhf{} %borra cabecera y pie actuales
+\fancyhead[LE,RO]{\bfseries\thepage}
+\fancyhead[LO]{\bfseries\leftmark}
+\renewcommand{\headrulewidth}{0.5pt}
+\renewcommand{\footrulewidth}{0pt}
+\addtolength{\headheight}{0.5pt} %espacio para la raya
+\fancypagestyle{plain}{%
+\fancyhead{} %elimina cabeceras en páginas "plain"
+\renewcommand{\headrulewidth}{0pt} %así como la raya
+}
+
+%%%%% Para cambiar el tipo de letra en el título de la sección %%%%%%%%%%%
+\usepackage{sectsty}
+\chapterfont{\fontfamily{pag}\selectfont} %% for chapter if you want
+\sectionfont{\fontfamily{pag}\selectfont}
+\subsectionfont{\fontfamily{pag}\selectfont}
+\subsubsectionfont{\fontfamily{pag}\selectfont}
+
+\renewcommand{\labelenumi}{\arabic{enumi}. }
+\renewcommand{\labelenumii}{\alph{enumii}) }
+\renewcommand{\labelenumiii}{\labelenumii\roman{enumiii}: }
+
+\begin{document}
+  \setcounter{section}{0}
+  \title{\huge\bf Informática Industrial \\ Relación de Ejercicios Nº 4}
+  \author{\large David Sánchez Jiménez}
+  \maketitle
+  \vspace{3cm}
+
+  \begin{enumerate}
+
+    % Ejercicio 1
+    \item \textbf{¿Qué es un bus de campo?}
+
+    \noindent
+    Un bus de campo es una conexión serie, digital, que permite la transferencia de datos entre elementos primarios de automatización (elementos de campo) empleados en fabricación de procesos, y elementos de automatización y control de más alto nivel.
+
+    % Ejercicio 2
+    \item \textbf{Justifique el uso de los buses de campo.}
+
+    \noindent
+    Los buses de campo se utilizan para:
+    \begin{itemize}
+      \item Mejorar calidad y cantidad en el flujo de datos.
+      \item Reducir errores.
+      \item Disminuir el coste (instalación y cableado, módulos de control, conexiones, mano de obra, ...)
+      \item Facilitar la ampliación y modificaciones.
+      \item Incluir funciones de diagnóstico, calibración y mantenimiento.
+      \item Minimizar conexiones y cableado.
+      \item Disminuir tiempos de mantenimiento y pérdidas de producción.
+      \item Permitir la intercambiabilidad entre dispositivos de distintros suministradores (menor dependencia).
+    \end{itemize}
+
+    % Ejercicio 3
+    \item \textbf{¿Qué capas del modelo OSI se utilizan en los buses de campo industriales?}
+
+    Las capas del modelo OSI que se utilizan en los buses de campo industriales son la capa física, la de enlace y la de aplicación.
+
+    \newpage
+    % Ejercicio 4
+    \item \textbf{Describa las topologías de redes que se usan en la industria.}
+
+    \begin{itemize}
+      \item Red en anillo: Cada estación está conectada a la siguiente y la última esta conectada a la primera formando un anillo. Cada estación tiene un receptor y un transmisor que hace la función de repetidor, pasando la señal a la siguiente estación del anillo. La comunicación se da por el paso de un token que va nodo a nodo recogiendo y entregando paquetes con información por lo que se evita que esta se pierda debido a colisiones.
+
+      \item Red en arbol: Los nodos están colocados en forma de árbol. La conexión en árbol es parecida a una serie de redes en estrella interconectadas. Es una variación de la red en bus, la falla de un nodo no implica interrupción en las comunicaciones. Se comparte el mismo canal de comunicaciones. Cuenta con un backbone al que hay conectadas redes individuales en bus.
+
+      \item Red en malla: Cada nodo está conectado a uno o más de los otros nodos por lo que es posible llevar los mensajes de un nodo a otro por diferentes caminos. Si la red de malla está completamente conectada no puede existir absolutamente ninguna interrupción en las comunicaciones ya que cada servidor tiene sus propias conexiones con todos los demás servidores.
+
+      \item Red en bus: Todas las estaciones están conectadas a un único canal de comunicaciones por medio de unidades interfaz y derivadores. Las estaciones utilizan este canal para comunicarse con el resto. Tiene todos sus nodos conectados directamente a un enlace y no tiene ninguna otra conexión entre nodos. Físicamente cada host está conectado a un cable común, por lo que se pueden comunicar directamente, aunque la ruptura del cable hace que los hosts queden desconectados. La topología de bus permite que todos los dispositivos de la red puedan ver todas las señales de todos los demás dispositivos, lo que puede ser ventajoso si desea que todos los dispositivos obtengan esta información. Sin embargo, puede representar una desventaja, ya que es común que se produzcan problemas de tráfico y colisiones, que se pueden paliar segmentando la red en varias partes.
+
+      \item Red Inalambrica Wi-Fi: Las redes sin cables hacen posible que se pueda conectar a una red local cualquier dispositivo sin necesidad de instalación. Esta tecnología permite la conexión de cualquier equipo informático a una red de datos Ethernet sin necesidad de cableado.
+    \end{itemize}
+
+    \noindent
+
+    % Ejercicio 5
+    \item \textbf{Indique los principales medios físicos empleados en las comunicaciones industriales.}
+
+    \noindent
+    Los principales medios físicos empleados en las comunicaciones industriales son:
+
+    \begin{itemize}
+      \item Cable (par trenzado, apantallado, coaxial, ...)
+      \item Fibra óptica (mononodo, multinodo, ...)
+      \item Radio (UFH, MICROONDAS, Spread Spectrum, Wifi, Zigbee, ...)
+      \item Red telefónica básica (Modem RTB)
+      \item Telefonía móvil (GSM, GSM-SMS, GPRS, 3G, 4G, ...)
+      \item Satélite (INMARSAT, HISPASAT, ORBCOMM, ...)
+    \end{itemize}
+
+    \newpage
+    % Ejercicio 6
+    \item \textbf{Describa el funcionamiento y los diferentes tipos de fibra óptica.}
+
+    \noindent
+    \begin{itemize}
+      \item \textbf{Fibra Multinodo: } Una fibra multinodo es aquella en la que los haces de luz pueden circular por mas de un modo o camino. Tiene una mayor dispersión nodal y se usan en aplicaciones de corta distancia.
+
+      \item \textbf{Fibra Mononodo: } Una fibra mononodo corresponde a una única fibra con un diámetro muy estrecho que se usa en aplicaciones de larga distancia.
+    \end{itemize}
+
+    % Ejercicio 7
+    \item \textbf{Ventajas e inconvenientes de la comunicación vía radio para la transmisión de datos en redes de telecontrol.}
+
+    \noindent
+    Las ventajas de la emisión de datos en radio son:
+    \begin{itemize}
+      \item Permite comunicar de forma ininterrumpida e inalámbrica, ubicaciones distantes entre sí varios kilómetros.
+      \item Transmiten en el rango de las microondas por lo que las tasas de transferencia de información son muy elevadas.
+      \item No hay retardos apreciables en las transmisiones.
+    \end{itemize}
+
+    Los inconvenientes son:
+    \begin{itemize}
+      \item Si la distancia es excesiva se requiere la instalación de antenas repetidoras.
+      \item Se necesita licencia de emisión salvo en las bandas ISM.
+    \end{itemize}
+
+    % Ejercicio 8
+    \item \textbf{Tipos de satélites en función de su órbita. Ventaja e inconvenientes de cada tipo.}
+
+    \noindent
+    Satelites Geoestacionarios
+    \begin{itemize}
+      \item Situados en órbita a 35800 km.
+      \item Giran en el mismo sentido y a la misma velocidad angular de la tierra.
+      \item Mantienen una posición fija con respecto a la superficie.
+      \item Debido a su gran altura necesitan terminales con alta potencia de transmisión y/o antenas de gran diámetro
+    \end{itemize}
+
+    Satelites de baja orbita
+    \begin{itemize}
+      \item Situados a una distancia no superior a 1800 km.
+      \item Son de bajo coste con una alta capacidad de procesamiento y de pequeño tamaño
+      \item Tienen terminales pequeñas, de baja potencia y de bajo coste, con antenas simples.
+    \end{itemize}
+
+
+    % Ejercicio 9
+    \item \textbf{¿Qué es el polling?}
+
+    \noindent
+    El polling es una operación de consulta constante, generalmente hacia un dispositivo de hardware, para crear una actividad sincrónica sin el uso de interruptores, aunque también puede suceder lo mismo para recursos software.
+
+    % Ejercicio 10
+    \item \textbf{Describa los principales métodos de control del medio usados en un sistema de telecontrol.}
+
+
+
+    \newpage
+    % Ejercicio 11
+    \item \textbf{Indique los principales requisitos de un bus de campo.}
+
+    \noindent
+    Los principales requisitos de un bus de campo son:
+    \begin{itemize}
+      \item Que esten diseñados para transmitir pequeñas cantidades de datos.
+      \item Que cubran necesidades de tiempo real.
+      \item Que tengan una gran compatibilidad electromagnética.
+      \item Que tengan un número reducido de estaciones.
+      \item Que tengan una fácil configuración.
+      \item Que tenga protocolos simples y limitados.
+      \item Que tenga un coste bajo de conexión.
+      \item Que sea pseudoconsistente con el modelo OSI de ISO.
+    \end{itemize}
+
+    % Ejercicio 12
+    \item \textbf{Ponga un ejemplo de trama de datos de un bus de campo.}
+
+    \noindent
+    El protocolo Modbus tiene una estructura de trama muy sencilla, siendo uno de los motivos de su exito junto a ser un protocolo abierto y a no estar orientado a conexión.
+
+    La estructura basica de una trama Modbus, tanto de lectura como de escritura consta de:
+    \begin{itemize}
+      \item Direccion del esclavo - 1 Byte
+      \item Función Modbus - 1 Byte
+      \item Bytes de Datos - N Bytes
+      \item Comprobación de Errores - 2 Bytes
+    \end{itemize}
+  \end{enumerate}
+\end{document}
